@@ -3,7 +3,7 @@ import List from "./List";
 import { Button, Card, CardBody, CardTitle } from "reactstrap";
 import { toast } from "react-toastify";
 import OrderButton from "./order-button";
-import Modal from "./modal";
+import MyModal from "./modal";
 
 const Container = () => {
   const [items, setItems] = useState([
@@ -14,9 +14,9 @@ const Container = () => {
   const [order, setOrder] = useState("asc");
   const [open, setOpen] = useState(false);
 
-  const addItem = name => {
+  const addItem = newItem => {
     const newId = currentId + 1;
-    setItems([...items, { name, id: newId }]);
+    setItems([...items, { name: newItem.name, id: newId }]);
     setCurrentId(newId);
   };
 
@@ -58,7 +58,7 @@ const Container = () => {
           <List items={items} deleteItem={deleteItem} />
         </CardBody>
       </Card>
-      <Modal open={open} addItem={addItem} />
+      <MyModal open={open} addItem={addItem} onClose={() => setOpen(false)}/>
     </div>
   );
 };
